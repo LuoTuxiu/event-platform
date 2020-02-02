@@ -10,16 +10,26 @@
         <a href="https://nuxtjs.org/" target="_blank" class="button--green">Documentation</a>
         <a href="https://github.com/nuxt/nuxt.js" target="_blank" class="button--grey">GitHub</a>
       </div>
+      <button @click="handleClickLogin">登录</button>
     </div>
   </section>
 </template>
 
 <script>
 import Logo from '~/components/Logo.vue'
+const axios = require('axios')
 
 export default {
   components: {
     Logo
+  },
+  methods: {
+    handleClickLogin() {
+      console.log(222)
+      axios.get('http://localhost:3001/user/login').then(data => {
+        console.log(data)
+      })
+    }
   }
 }
 </script>
