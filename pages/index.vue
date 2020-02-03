@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     handleClickLogin() {
-      axios.get('http://119.27.191.205/api//user/login').then(data => {
+      axios.get('http://119.27.191.205/api/user/login').then(data => {
         console.log(data)
       })
     }
