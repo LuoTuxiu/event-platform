@@ -6,27 +6,68 @@
       <h2 class="subtitle">My badass Nuxt.js project</h2>
       <div>测试</div>
       <nuxt-link to="/test">去测试页</nuxt-link>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">Documentation</a>
-        <a href="https://github.com/nuxt/nuxt.js" target="_blank" class="button--grey">GitHub</a>
-      </div>
-      <button @click="handleClickLogin">登录</button>
+      <el-form 
+        ref="rigister" :rules="rules" :model="form" 
+        label-width="80px">
+        <el-form-item required label="用户名" prop="name">
+          <el-input v-model="form.name"/>
+        </el-form-item>
+        <el-form-item label="密码" required prop="passwd">
+          <el-input v-model="form.passwd"/>
+        </el-form-item>
+        <el-button @click="handleClickRigister">注册</el-button>
+      </el-form>
+      <el-button @click="handleClickLogin">登录</el-button>
     </div>
   </section>
 </template>
 
 <script>
 import Logo from '~/components/Logo.vue'
-const axios = require('axios')
+import { login, getUserInfo, registerApi } from '../api/user'
 
 export default {
   components: {
     Logo
   },
+  data() {
+    return {
+      form: {},
+      rules: {}
+    }
+  },
+  mounted() {
+    this.getUserInfo()
+  },
   methods: {
-    handleClickLogin() {
-      axios.get('http://119.27.191.205/api/user/login').then(data => {
+    getUserInfo() {
+      getUserInfo().then(data => {
         console.log(data)
+      })
+    },
+    handleClickLogin() {
+      const params = {
+        name: 'luotuxiu',
+        passwd: 'xxx'
+      }
+      login(params).then(data => {
+        console.log(data)
+        localStorage.setItem('token', data.token)
+      })
+    },
+    handleClickRigister() {
+      this.$refs['rigister'].validate(valid => {
+        console.log(valid)
+        if (valid) {
+          registerApi(this.form)
+            .then(data => {
+              console.log('注册成功')
+              localStorage.setItem('token', data.token)
+            })
+            .catch(error => {
+              this.$message(error)
+            })
+        }
       })
     }
   }
