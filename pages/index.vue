@@ -1,25 +1,34 @@
 <template>
-  <section class="container">
-    <div>
-      <logo />
-      <h1 class="title">event-platform</h1>
-      <h2 class="subtitle">My badass Nuxt.js project</h2>
-      <div>测试</div>
-      <nuxt-link to="/test">去测试页</nuxt-link>
-      <el-form 
-        ref="rigister" :rules="rules" :model="form" 
-        label-width="80px">
-        <el-form-item required label="用户名" prop="name">
-          <el-input v-model="form.name"/>
-        </el-form-item>
-        <el-form-item label="密码" required prop="passwd">
-          <el-input v-model="form.passwd"/>
-        </el-form-item>
-        <el-button @click="handleClickRigister">注册</el-button>
-      </el-form>
-      <el-button @click="handleClickLogin">登录</el-button>
-    </div>
-  </section>
+  <div>
+    <section class="container">
+      <div>
+        <logo />
+        <h1 class="title">event-platform</h1>
+        <h2 class="subtitle">My badass Nuxt.js project</h2>
+        <div>测试</div>
+        <nuxt-link to="/test">去测试页</nuxt-link>
+        <el-form 
+          ref="rigister" :rules="rules" :model="form" 
+          label-width="80px">
+          <el-form-item required label="用户名" prop="name">
+            <el-input v-model="form.name"/>
+          </el-form-item>
+          <el-form-item label="密码" required prop="passwd">
+            <el-input v-model="form.passwd"/>
+          </el-form-item>
+          <el-button @click="handleClickRigister">注册</el-button>
+        </el-form>
+        <el-button @click="handleClickLogin">登录</el-button>
+      </div>
+     
+    </section>
+    <footer class="beian">
+      <div class="copyright">
+        © 2020 ltx 版权所有.
+        <a href="http://www.beian.miit.gov.cn" rel="nofollow">粤ICP备20008684号</a><i/>
+      </div>
+    </footer>
+  </div>
 </template>
 
 <script>
@@ -74,7 +83,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .container {
   min-height: 100vh;
   display: flex;
@@ -103,5 +112,8 @@ export default {
 
 .links {
   padding-top: 15px;
+}
+.copyright {
+  text-align: center;
 }
 </style>
